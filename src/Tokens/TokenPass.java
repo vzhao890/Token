@@ -12,17 +12,19 @@ public class TokenPass
        {
            arr[i]=(int)(Math.random()*10)+1;
        }
-       position= (int)(Math.random()*playerCount)+1;
+       position= (int)(Math.random()*playerCount)-1;
     }
     public void printBoard()
     {
         for(int i=0;i<arr.length-1;i++)
         {
-            System.out.println(arr[i]);
+            System.out.print(arr[i]);
         }
+        System.out.println();
     }
     public static void distributeCurrentPlayerToken()
     {
+
         for(int i=0;i<arr.length-1;i++)
         {
             arr[position]= arr[position]-1;
@@ -31,7 +33,7 @@ public class TokenPass
     }
     public static void nextPlayer()
     {
-        if(position=<arr.length-1)
+        if(position<arr.length-1)
         {
             position+=1;
         }
@@ -39,6 +41,7 @@ public class TokenPass
         {
             position=0;
         }
+
     }
     public int gameOver()
     {
