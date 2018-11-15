@@ -18,29 +18,33 @@ public class TokenPass
     {
         for(int i=0;i<arr.length-1;i++)
         {
-            System.out.print(arr[i]);
+            System.out.print(arr[i]+"-");
         }
         System.out.println();
     }
     public static void distributeCurrentPlayerToken()
     {
-
-        for(int i=0;i<arr.length-1;i++)
+        int i=0;
+        int placeholder=arr[position];
+        arr[position]=0;
+        for(int k=0;k<placeholder;k++)
         {
-            arr[position]= arr[position]-1;
-            arr[position+1]= arr[position+1]+1;
+            arr[i] += 1;
+           i++;
         }
+
     }
     public static void nextPlayer()
     {
-        if(position<arr.length-1)
-        {
-            position+=1;
-        }
-        else if(position>arr.length-1)
+        if(position>arr.length-2)
         {
             position=0;
         }
+        else if(position<arr.length-1)
+        {
+            position+=1;
+        }
+
 
     }
     public int gameOver()
@@ -49,7 +53,7 @@ public class TokenPass
         {
             if(arr[i]==0)
             {
-                return 1;
+                return i;
             }
         }
         return -1;
