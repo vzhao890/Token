@@ -8,48 +8,50 @@ public class TokenPass
     public TokenPass(int playerCount)
     {
        arr = new int[playerCount];
-       for(int i=0;i<arr.length-1;i++)
+       for(int i=0;i<arr.length;i++)
        {
-           arr[i]=(int)(Math.random()*10)+1;
+           arr[i]=(int)(Math.random()*8)+1;
        }
-       position= (int)(Math.random()*playerCount)-1;
+       position= (int)(Math.random()*playerCount);
     }
     public void printBoard()
     {
-        for(int i=0;i<arr.length-1;i++)
+        for(int i=0;i<arr.length;i++)
         {
-            System.out.print(arr[i]+"-");
+            System.out.print(arr[i]+" ");
         }
+        System.out.print("       "+position);
         System.out.println();
     }
     public static void distributeCurrentPlayerToken()
     {
-        int i=0;
-        int placeholder=arr[position];
-        arr[position]=0;
-        for(int k=0;k<placeholder;k++)
-        {
-            arr[i] += 1;
-           i++;
-        }
+       int nextPlayer = position;
+       int numToDis=arr[position];
 
+       arr[position]=0;
+       while(numToDis>0)
+       {
+           nextPlayer =(nextPlayer+1)% arr.length;
+           arr[nextPlayer]++;
+           numToDis--;
+       }
     }
     public static void nextPlayer()
     {
-        if(position>arr.length-2)
-        {
-            position=0;
-        }
-        else if(position<arr.length-1)
+        if(position<arr.length)
         {
             position+=1;
+            if(position>=arr.length)
+            {
+                position=0;
+            }
         }
 
 
     }
     public int gameOver()
     {
-        for(int i=0;i<arr.length-1;i++)
+        for(int i=0;i<arr.length;i++)
         {
             if(arr[i]==0)
             {
@@ -58,6 +60,4 @@ public class TokenPass
         }
         return -1;
     }
-
-
 }
